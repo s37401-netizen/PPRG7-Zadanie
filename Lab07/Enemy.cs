@@ -10,7 +10,6 @@
         Health = health;
         Damage = damage;
     }
-
     public void TakeDamage(int damage)
     {
         
