@@ -51,7 +51,7 @@ else
     Console.WriteLine($"{player.Imie} ma teraz {player.Hp} HP.");
 }
 
-// 10. Zadanie aktywizujące: klasa Item
+// 9. Zadanie aktywizujące: klasa Item
 Item mikstura = new Item("Mikstura zdrowia", 15);
 mikstura.AddOne();
 mikstura.RemoveOne();
