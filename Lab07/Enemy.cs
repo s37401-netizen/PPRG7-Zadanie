@@ -1,27 +1,28 @@
-﻿public class Enemy
+public class Enemy
 {
-    public string Name { get; }
-    public int Health { get; set; }
-    public int Damage { get; }
+    public string Nazwa { get; }
+    public int Hp { get; set; }
+    public int Obrazenia { get; }
 
-    public Enemy(string name, int health, int damage)
+    public Enemy(string nazwa, int hp, int obrazenia)
     {
-        Name = name;
-        Health = health;
-        Damage = damage;
+        Nazwa = nazwa;
+        Hp = hp;
+        Obrazenia = obrazenia;
     }
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int obrazenia)
     {
-        
-        Health -= damage;
-        if (Health < 0)
+        Hp -= obrazenia;
+
+        if (Hp < 0)
         {
-            Health = 0;
+            Hp = 0;
         }
     }
 
     public bool IsAlive()
     {
-        return Health > 0;
+        return Hp > 0;
     }
 }
