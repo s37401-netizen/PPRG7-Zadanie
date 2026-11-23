@@ -1,70 +1,40 @@
 ﻿public class Player
 {
-    public string Name { get; }
-    public int Health { get; set; }
-    public int MaxHealth { get; set; }
-    public int Gold { get; set; }
-    public int Level { get; set; }
-    public int Experience { get; set; }
+    public string Imie { get; set; }
+    public int Hp { get; set; }
+    public int MaksymalneHp { get; }
+    public int Zloto { get; set; }
 
-    public Player(string name, int maxHealth, int gold,  int level, int experience)
+    public Player(string imie, int maksymalneHp, int zloto)
     {
-        Name = name;
-        MaxHealth = maxHealth;
-        Health = maxHealth;
-        Gold = gold;
-        Level = level;
-        Experience = experience;
+        Imie = imie;
+        MaksymalneHp = maksymalneHp;
+        Hp = maksymalneHp;
+        Zloto = zloto;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int obrazenia)
     {
-        Health -= damage;
-        
-        if (Health < 0)
+        Hp -= obrazenia;
+
+        if (Hp < 0)
         {
-            Health = 0;
+            Hp = 0;
         }
     }
 
-    public void Heal(int amount)
+    public void Heal(int leczenie)
     {
-        Health += amount;
+        Hp += leczenie;
 
-        if (Health > MaxHealth)
+        if (Hp > MaksymalneHp)
         {
-            Health = MaxHealth;
+            Hp = MaksymalneHp;
         }
     }
 
     public bool IsAlive()
     {
-        return Health > 0;
+        return Hp > 0;
     }
-
-    public int XP()
-    {
-        Console.WriteLine("Dostałeś 10 XP");
-        if (Experience + 10 >= 100)
-        {
-            Experience -= 100;
-            return newLevel();
-        }
-        else
-        {
-            Console.WriteLine($"Twoj poziom {Level} Level");
-            Experience += 10;
-        }
-        return Experience;
-    }
-
-    public int newLevel()
-    {
-        MaxHealth += 10;
-        Health = MaxHealth;
-        Level++;
-        Console.WriteLine($"Masz {Level} Level)");
-        return Level;
-    }
-    
 }
