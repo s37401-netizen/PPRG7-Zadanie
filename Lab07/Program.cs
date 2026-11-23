@@ -1,55 +1,58 @@
-﻿List<Enemy> enemies = new List<Enemy>
+// 1. Problem: luźne zmienne
+string imie = "Bohater";
+int hp = 80;
+int maksymalneHp = 100;
+int zloto = 25;
+bool maMiecz = true;
+Console.WriteLine($"{imie}: {hp}/{maksymalneHp} HP, złoto: {zloto}, miecz: {maMiecz}");
+
+// 2, 3, 4, 5. Klasa Player, właściwości, konstruktor, metody
+Player player = new Player("Bohater", 100, 25);
+player.Zloto += 10;
+Console.WriteLine($"{player.Imie} ma {player.Zloto} sztuk złota.");
+
+player.TakeDamage(35);
+Console.WriteLine($"Po obrażeniach: {player.Hp}/{player.MaksymalneHp} HP");
+
+player.Heal(50);
+Console.WriteLine($"Po leczeniu: {player.Hp}/{player.MaksymalneHp} HP");
+Console.WriteLine($"Czy żyje: {player.IsAlive()}");
+
+// Niezależność obiektów
+Player a = new Player("Ala", 100, 10);
+Player b = new Player("Bartek", 100, 10);
+Console.WriteLine($"Imię b: {b.Imie}");
+
+// 6. Lista przeciwników
+List<Enemy> enemies = new List<Enemy>
 {
     new Enemy("Goblin", 30, 8),
     new Enemy("Nietoperz", 20, 5),
     new Enemy("Ork", 70, 15)
 };
 
-foreach (Enemy enemy in enemies)
-{
-    Console.WriteLine($"{enemy.Name}: {enemy.Health} HP");
-}
+enemies[0].TakeDamage(10);
+Console.WriteLine($"{enemies[0].Nazwa}: {enemies[0].Hp} HP");
+Console.WriteLine($"{enemies[1].Nazwa}: {enemies[1].Hp} HP");
 
-Player player1 = new Player("Maciuś", 100, 25, 1, 40);
-Player player2 = new Player("Nietoperz", 100, 25, 1, 90);
+// 7. Prosta walka z kontrolą IsAlive()
 Enemy goblin = new Enemy("Goblin", 30, 8);
-Enemy zombie = new Enemy("Zombie", 30, 8);
+Console.WriteLine($"{player.Imie} spotyka: {goblin.Nazwa}");
+goblin.TakeDamage(12);
+Console.WriteLine($"{goblin.Nazwa} ma teraz {goblin.Hp} HP.");
 
-Console.WriteLine($"{player1.Name} oraz {player2.Name} spotykają {goblin.Name} i {zombie.Name}.");
-
-zombie.TakeDamage(15);
-goblin.TakeDamage(25);
-Console.WriteLine($"{goblin.Name} ma {goblin.Health} HP.");
-
-if (goblin.IsAlive())
+if (!goblin.IsAlive())
 {
-    player1.TakeDamage(goblin.Damage);
-    Console.WriteLine($"{player1.Name} ma {player1.Health} HP.");
+    Console.WriteLine("Przeciwnik został pokonany.");
 }
 else
 {
-    Console.WriteLine("Przeciwnik został pokonany.");
-    player1.XP();
+    player.TakeDamage(goblin.Obrazenia);
+    Console.WriteLine($"{player.Imie} ma teraz {player.Hp} HP.");
 }
 
-if (zombie.IsAlive())
-{
-    player2.TakeDamage(goblin.Damage);
-    Console.WriteLine($"{player2.Name} ma {player2.Health} HP.");
-}
-else
-{
-    Console.WriteLine("Przeciwnik został pokonany.");
-    player2.XP();
-}
-
-Console.WriteLine($"{player1.Name} ma {player1.Level} Level");
-Console.WriteLine($"{player1.Name} ma {player1.Experience} XP");
-Console.WriteLine($"{player2.Name} ma {player2.Level} Level");
-Console.WriteLine($"{player2.Name} ma {player2.Experience} XP");
-/*
-while (true)
-{
-       
-}
-*/
+// 10. Zadanie aktywizujące: klasa Item
+Item mikstura = new Item("Mikstura zdrowia", 15);
+mikstura.AddOne();
+mikstura.RemoveOne();
+Console.WriteLine($"{mikstura.Nazwa} (cena: {mikstura.Cena}), sztuk: {mikstura.LiczbaSztuk}");
